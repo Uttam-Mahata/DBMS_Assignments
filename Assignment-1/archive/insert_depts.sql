@@ -1,0 +1,15 @@
+insert into depts values('CST','Computer Science & Technology');
+insert into depts values('ETC','Electronics & Teleommunication Engineering');
+insert into depts values('ME','Mechanical Engineering');
+insert into depts values('EE','Electrical Engineering');
+insert into depts values('CE','Civil Engineering');
+insert into depts values('ARCH', 'Architecture');
+insert into depts values('IT', 'Information Technology');
+insert into depts values('MN', 'Mining Engineering');
+insert into depts values('MM', 'Metallurgical & Materials Engineering');
+insert into depts values('MATH', 'Mathematics');
+insert into depts values('PHYS', 'Physics');
+insert into depts values('CHEM', 'Chemistry');
+insert into depts values('HUM', 'Humanities');
+insert into depts values('MBA', 'Management');
+insert into depts values('AM', 'Aerospace Engineering');
