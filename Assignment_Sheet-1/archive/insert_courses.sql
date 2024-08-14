@@ -73,16 +73,16 @@ INSERT INTO crs_offrd (crs_code, crs_name, crs_credits, crs_fac_cd) VALUES
 
 -- Architecture
 INSERT INTO crs_offrd (crs_code, crs_name, crs_credits, crs_fac_cd) VALUES
-('ARCH201', 'History of Architecture', 4, 'FAC011'),
-('ARCH202', 'Urban Design', 4, 'FAC012'),
-('ARCH203', 'Building Services', 4, 'FAC011'),
-('ARCH204', 'Landscape Architecture', 4, 'FAC012'),
-('ARCH205', 'Architectural Acoustics', 3, 'FAC013'),
-('ARCH206', 'Green Building Design', 4, 'FAC013'),
-('ARCH207', 'Interior Design', 3, 'FAC014'),
-('ARCH208', 'Building Information Modeling', 4, 'FAC014'),
-('ARCH209', 'Housing', 4, 'FAC015'),
-('ARCH210', 'Sustainable Architecture', 4, 'FAC015');
+('ARCH101', 'History of Architecture', 4, 'FAC011'),
+('ARCH102', 'Urban Design', 4, 'FAC012'),
+('ARCH103', 'Building Services', 4, 'FAC011'),
+('ARCH104', 'Landscape Architecture', 4, 'FAC012'),
+('ARCH105', 'Architectural Acoustics', 3, 'FAC013'),
+('ARCH106', 'Green Building Design', 4, 'FAC013'),
+('ARCH107', 'Interior Design', 3, 'FAC014'),
+('ARCH108', 'Building Information Modeling', 4, 'FAC014'),
+('ARCH109', 'Housing', 4, 'FAC015'),
+('ARCH110', 'Sustainable Architecture', 4, 'FAC015');
 
 -- Information Technology
 INSERT INTO crs_offrd (crs_code, crs_name, crs_credits, crs_fac_cd) VALUES

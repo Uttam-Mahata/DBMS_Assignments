@@ -158,6 +158,9 @@ INSERT INTO students VALUES ('CS1006', 'Shreyash Iyer', 'CSE', '2004-01-10', 3, 
 INSERT INTO crs_regd VALUES ('CS1006', 'CS104', 65.0);  -- Enrolled in DBMS
 INSERT INTO crs_regd VALUES ('CS1006', 'CS105', 75.0);  -- Enrolled in OS
 INSERT INTO crs_regd VALUES ('CS1006', 'EE101', 85.0);  -- Enrolled in Circuits
+INSERT INTO crs_regd VALUES ('CS1006', 'MG101', 95.0);  -- Enrolled in MIS
+INSERT INTO crs_regd VALUES ('CS1006', 'CS106', 75.0);  -- Enrolled in Software Engg
+INSERT INTO crs_regd VALUES ('CS1006', 'ECE101', 85.0);  -- Enrolled in Data Structures
 
 
 -- Assuming the existance of several interdepartmental courses, insert the
@@ -167,6 +170,15 @@ INSERT INTO students VALUES ('CS1007', 'Praveen Mehta', 'CSE', '2003-12-05', 2, 
 INSERT INTO crs_regd VALUES ('CS1007', 'CS104', 45.0);  -- Enrolled in DBMS
 INSERT INTO crs_regd VALUES ('CS1007', 'CS105', 55.0);  -- Enrolled in OS
 INSERT INTO crs_regd VALUES ('CS1007', 'EE101', 65.0);  -- Enrolled in Circuits
+
+-- ADD Faculty
+INSERT INTO faculty VALUES ('FAC006', 'Dr. Arpit Iyer', 'ELE');
+INSERT INTO faculty VALUES ('FAC007', 'Dr. Amal Rao', 'ME');
+INSERT INTO faculty VALUES ('FAC008', 'Dr. Ravindra Mehta', 'CSE');
+
+insert into depts values('ARCH', 'Architecture');
+
+
 
 
 
@@ -220,6 +232,20 @@ marks = (
 
 select crs_cd, max(marks) - min(marks) as DifferenceOfMarks
 from crs_regd
+
+-- Assuming the existance of several interdepartmental courses, retrieve the
+-- name of the student(s) who is(are) studing under at least one faculty from
+-- each department.
+
+select student_name
+from students s
+
+join crs_regd r on s.rollno = r.crs_rollno
+where c
+
+
+
+
 
 
 
