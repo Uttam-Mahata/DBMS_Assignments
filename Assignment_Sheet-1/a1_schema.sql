@@ -35,3 +35,51 @@ foreign key (crs_cd) references crs_offrd(crs_code),
 marks dec(5,2),
 primary key(crs_rollno, crs_cd));
 
+-- retrieve the name of the student(s) who is(are) studing under at least one faculty from each department.
+
+
+select student_name
+from students
+where rollno = (
+    select crs_rollno
+    from crs_regd
+    group by crs_rollno
+
+    having count(distinct crs_cd) >= (
+        select count(distinct fac_code) from faculty
+    )
+);
+
+
+-- retrieve the name of the student(s) who is(are) studing under the faculties only from his(their) own department.
+select student_name
+from students
+where rollno = (
+    select crs_rollno
+    from crs_regd
+    group by crs_rollno
+    having count(distinct crs_cd) = (
+        select count(distinct fac_code) from faculty
+        where fac_dept = (
+            select deptcode from depts where deptcode = students.deptcode
+        )
+    )
+);
+
+
+-- Find the roll number of the students from each department who obtained highest total marks in their own department.
+
+select rollno from students
+where rollno = (
+    select crs_rollno
+    from crs_regd
+    group by crs_rollno
+    having sum(marks) = (
+        select max(sum(marks)) from (
+            select crs_rollno, sum(marks) as marks
+            from crs_regd
+            group by crs_rollno
+        ) as temp
+        where crs_rollno = students.rollno
+    )
+);

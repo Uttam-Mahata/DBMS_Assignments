@@ -11,7 +11,7 @@ WHERE s.deptcode = 'ELE' AND r.crs_cd = 'EE101';
 
 SELECT s.rollno, s.student_name
 FROM students s
-WHERE s.deptcode = 'ELE' AND s.rollno NOT IN (
+WHERE s.deptcode = 'ELE' AND NOT s.rollno  = (
     SELECT crs_rollno FROM crs_regd WHERE crs_cd = 'EE101'
 );
 
@@ -24,21 +24,21 @@ AND cr2.crs_cd = 'CS105';
 
 SELECT f.fac_name
 FROM faculty f
-WHERE f.fac_code IN (
+WHERE f.fac_code = (
     SELECT crs_fac_cd 
     FROM crs_offrd 
-    WHERE crs_name IN ('MIS', 'Software Engg.')
+    WHERE crs_name = ('MIS', 'Software Engg.')
 );
 
 
 SELECT f.fac_name
 FROM faculty f
-WHERE f.fac_code IN (
+WHERE f.fac_code = (
     SELECT crs_fac_cd 
     FROM crs_offrd 
     WHERE crs_name = 'MIS'
 )
-AND f.fac_code NOT IN (
+AND  NOT f.fac_code =  (
     SELECT crs_fac_cd 
     FROM crs_offrd 
     WHERE crs_name = 'Software Engg.'
@@ -46,7 +46,7 @@ AND f.fac_code NOT IN (
 
 SELECT s.hostel, s.rollno, s.student_name
 FROM students s
-WHERE s.rollno NOT IN (
+WHERE NOT s.rollno  = (
     SELECT crs_rollno FROM crs_regd
 );
 
