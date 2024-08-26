@@ -17,17 +17,7 @@ INSERT INTO crs_regd VALUES
 
 
 
-select student_name
-from students
-where rollno = (
-    select crs_rollno
-    from crs_regd
-    group by crs_rollno
 
-    having count(distinct crs_cd) >= (
-        select count(distinct fac_code) from faculty
-    )
-);
 
 
 

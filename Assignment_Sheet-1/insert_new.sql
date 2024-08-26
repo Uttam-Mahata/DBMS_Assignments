@@ -18,14 +18,14 @@ INSERT INTO faculty (fac_code, fac_name, fac_dept) VALUES
 
 
 INSERT INTO crs_regd (crs_rollno, crs_cd, marks) VALUES
-('CS1001', 'CS102', 95.0),  -- Marks > 90 for CS102
-('CS1001', 'CS103', 92.0),  -- Marks > 90 for CS103
-('CS1002', 'CS103', 91.0);  -- Marks > 90 for CS103
+('CS1001', 'CS102', 95.0),  
+('CS1001', 'CS103', 92.0),  
+('CS1002', 'CS103', 91.0);  
 
 INSERT INTO crs_regd (crs_rollno, crs_cd, marks) VALUES
-('CS1004', 'CS104', 85.0),  -- Enrolled in DBMS
-('CS1004', 'CS105', 91.0),  -- Enrolled in OS
-('CS1005', 'CS104', 88.0),  -- Enrolled in DBMS
-('CS1005', 'CS105', 92.0);  -- Enrolled in OS
+('CS1004', 'CS104', 85.0),  
+('CS1004', 'CS105', 91.0),  
+('CS1005', 'CS104', 88.0),  
+('CS1005', 'CS105', 92.0);  
 
 

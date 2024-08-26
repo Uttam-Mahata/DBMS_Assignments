@@ -14,7 +14,7 @@ WHERE crs_fac_cd = (
 );
 
 SELECT * FROM crs_offrd
-WHERE crs_credits BETWEEN 4.0 AND 6.0;
+WHERE crs_credits between 4.0 AND 6.0;
 
 SELECT * FROM crs_offrd
 WHERE crs_credits > 6.5;

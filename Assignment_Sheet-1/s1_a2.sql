@@ -20,13 +20,14 @@ FROM students
 WHERE deptcode = 'CSE'
 GROUP BY hostel;
 
-SELECT hostel, rollno, parent_inc
-FROM students
-WHERE parent_inc = (
-    SELECT MAX(parent_inc)
-    FROM students
-    WHERE hostel = students.hostel
+SELECT s.hostel, s.rollno, s.parent_inc
+FROM students s
+WHERE s.parent_inc = (
+    SELECT MAX(s2.parent_inc)
+    FROM students s2
+    WHERE s2.hostel = s.hostel
 );
+
 
 SELECT student_name, parent_inc
 FROM students
@@ -43,4 +44,4 @@ WHERE marks > (
     FROM crs_regd
     WHERE crs_rollno = 'CS1001' AND crs_cd = 'CS102'
 )
-AND (crs_cd = 'CS102' OR crs_cd = 'CS103');
+AND (crs_cd = 'CS102' or crs_cd = 'CS103');
