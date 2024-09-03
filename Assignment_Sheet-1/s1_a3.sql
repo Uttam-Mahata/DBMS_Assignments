@@ -48,7 +48,7 @@ INTERSECT
 SELECT f.fac_name
 FROM faculty f
 WHERE 
-  NOT f.fac_code =  (
+   f.fac_code =  (
     SELECT crs_fac_cd 
     FROM crs_offrd 
     WHERE crs_name = 'Software Engg.'

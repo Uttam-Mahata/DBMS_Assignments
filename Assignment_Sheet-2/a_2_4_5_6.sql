@@ -1,5 +1,3 @@
-
-
 select student_name
 from students
 where student_name like 'S%r_';
@@ -24,7 +22,7 @@ GROUP BY student_name;
 select student_name,
  TIMESTAMPDIFF(YEAR, bdate, CURDATE()) as Age from students;
  
- 
+ -------------------------------------------------------------
 select student_name, marks as Second_Highest_Marks
 from students s
 
@@ -45,10 +43,12 @@ marks = (
         )
     )
 );
+-------------------------------------------------------------
 
 select crs_cd, max(marks) - min(marks) as DifferenceOfMarks
 from crs_regd
 group by crs_cd;
+-------------------------------------------------------------
 
 
 
@@ -62,7 +62,7 @@ JOIN faculty f ON co.crs_fac_cd = f.fac_code
 GROUP BY s.rollno, s.student_name
 HAVING COUNT(DISTINCT f.fac_code) = (SELECT COUNT(*) FROM depts);
 
-
+-------------------------------------------------------------
 
 SELECT s.student_name
 FROM students s
@@ -78,7 +78,7 @@ HAVING COUNT(*) = (
     JOIN faculty f2 ON co2.crs_fac_cd = f2.fac_code
     WHERE cr2.crs_rollno = s.rollno
 );
-
+-------------------------------------------------------------
 
 SELECT deptcode, MAX(parent_inc) AS highest_income
 FROM students
