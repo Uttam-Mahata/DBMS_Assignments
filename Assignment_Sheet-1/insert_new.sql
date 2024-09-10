@@ -2,7 +2,7 @@
 INSERT INTO students VALUES ('CS1003', 'Sanya Gupta', 'CSE', '2003-05-10', 3, 60000.0);
 INSERT INTO students VALUES ('CS1004', 'Ankit Verma', 'CSE', '2003-08-25', 4, 55000.0);
 INSERT INTO students VALUES ('ME1001', 'Vikram Rao', 'ME', '2004-03-22', 1, 48000.0);
-INSERT INTO students VALUES ('CSE1005', 'Neha Dubey', 'CSE', '2003-09-30', 2, 70000.0);
+INSERT INTO students VALUES ('CS1005', 'Neha Dubey', 'CSE', '2003-09-30', 2, 70000.0);
 
 -- Additional course registrations
 INSERT INTO crs_regd VALUES ('CS1003', 'CS101', 78.0);

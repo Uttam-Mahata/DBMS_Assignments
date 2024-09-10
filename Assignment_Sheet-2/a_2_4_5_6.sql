@@ -1,7 +1,11 @@
+-- Retrieve the name of the students whose name starts with ‘S’ and contains ‘r’
+as the second last character.
 select student_name
 from students
 where student_name like 'S%r_';
 
+-- Retrieve the name of the youngest student(s) from the ‘CST’ department
+-- along with the total marks obtained by him (them).
 
 SELECT student_name, SUM(marks) AS Total_Marks
 FROM students s

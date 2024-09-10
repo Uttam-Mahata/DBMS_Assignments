@@ -6,6 +6,7 @@ INSERT INTO depts VALUES ('ME', 'Mechanical Engineering');
 
 INSERT INTO students VALUES ('CS1001', 'Rahul Sharma', 'CSE', '2003-03-15', 1, 50000.0);
 INSERT INTO students VALUES ('CS1002', 'Priya Singh', 'CSE', '2004-07-20', 2, 40000.0);
+INSERT INTO students VALUES ('CS1003', 'Avi Agarwal', 'CSE', '2003-05-10', 3, 60000.0);
 INSERT INTO students VALUES ('ECE1001', 'Amit Kumar', 'ECE', '2003-11-11', 3, 45000.0);
 
 
@@ -26,11 +27,6 @@ INSERT INTO crs_regd VALUES ('ECE1001', 'ECE101', 88.0);
 
 
 
-INSERT INTO depts VALUES ('ELE', 'Electrical Engineering');
-
-INSERT INTO students VALUES ('ELE1001', 'Kiran Deshmukh', 'ELE', '2003-02-19', 1, 52000.0);
-INSERT INTO students VALUES ('ELE1002', 'Suresh Mehta', 'ELE', '2003-12-05', 2, 47000.0);
-INSERT INTO students VALUES ('ELE1003', 'Rajesh Iyer', 'ELE', '2004-01-10', 3, 65000.0);
 
 INSERT INTO crs_offrd VALUES ('EE101', 'Circuits', 4.0, 'FAC003');
 INSERT INTO crs_offrd VALUES ('CS104', 'DBMS', 3.5, 'FAC001');
@@ -43,11 +39,7 @@ INSERT INTO students VALUES ('ELE1001', 'Kiran Deshmukh', 'ELE', '2003-02-19', 1
 INSERT INTO students VALUES ('ELE1002', 'Suresh Mehta', 'ELE', '2003-12-05', 2, 47000.0);
 INSERT INTO students VALUES ('ELE1003', 'Rajesh Iyer', 'ELE', '2004-01-10', 3, 65000.0);
 
-INSERT INTO crs_offrd VALUES ('EE101', 'Circuits', 4.0, 'FAC003');
-INSERT INTO crs_offrd VALUES ('CS104', 'DBMS', 3.5, 'FAC001');
-INSERT INTO crs_offrd VALUES ('CS105', 'OS', 4.0, 'FAC002');
-INSERT INTO crs_offrd VALUES ('MG101', 'MIS', 3.0, 'FAC003');
-INSERT INTO crs_offrd VALUES ('CS106', 'Software Engg.', 4.0, 'FAC001');
+
 
 INSERT INTO crs_regd VALUES ('ELE1001', 'EE101', 75.0);
 INSERT INTO crs_regd VALUES ('ELE1002', 'CS104', 45.0);  
