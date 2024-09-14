@@ -84,4 +84,103 @@ INSERT INTO TBL_SHIPMENT_DETAILS VALUES (1010, 1010, 1000.00, 'WB342302', 'PATNA
 
 
 
+--  Give names of customer who have sent packages (shipments) to Kolkata, Chennai and Mumbai.
+
+SELECT CUSTOMER_NAME FROM TBL_CUSTOMER
+WHERE CUSTOMER_ID IN (
+    SELECT CUSTOMER_ID FROM TBL_SHIPMENT_DETAILS
+    WHERE DESTINATION_CITY IN ('KOLKATA', 'CHENNAI', 'MUMBAI')
+);
+
+-- List the names of the driver who have delivered shipments weighing over 200 pounds.
+select DRIVER_NAME from TBL_TRUCK_INFO
+where TRUCK_NO = (
+    select TRUCK_NO from TBL_SHIPMENT_DETAILS
+    where WEIGHT > 200
+);
+
+
+-- Retrieve the maximum and minimum weights of the shipments. Rename the output as Max_Weight and Min_Weight respectively.
+
+SELECT MAX(weight) AS Max_Weight, MIN(weight) AS Min_Weight
+FROM TBL_SHIPMENT_DETAILS;
+
+
+--  For each customer, what is the average weight of package sent by the customer?
+
+SELECT CUSTOMER_ID, AVG(WEIGHT) AS AVG_WEIGHT
+FROM TBL_SHIPMENT_DETAILS
+GROUP BY CUSTOMER_ID;
+
+-- List the names and populations of cities that have received a shipment weighing over 100 pounds.
+
+SELECT CITY_NAME, CITY_POPULATION
+FROM TBL_CITY
+WHERE TBL_CITY.CITY_NAME IN (
+    SELECT DESTINATION_CITY
+    FROM TBL_SHIPMENT_DETAILS
+    WHERE WEIGHT > 100
+);
+
+--  List cities that have received shipments from every customer.
+
+SELECT DESTINATION_CITY
+FROM TBL_SHIPMENT_DETAILS
+GROUP BY DESTINATION_CITY
+HAVING COUNT(DISTINCT CUSTOMER_ID) = (SELECT COUNT(DISTINCT CUSTOMER_ID) FROM TBL_SHIPMENT_DETAILS);
+
+-- For each city, what is the maximum weight of a package sent to that city?
+
+SELECT DESTINATION_CITY, MAX(WEIGHT) AS MAX_WEIGHT
+FROM TBL_SHIPMENT_DETAILS
+GROUP BY DESTINATION_CITY;
+
+-- List the name and annual revenue of customers whose shipments have been delivered by truck driver ‘IQBAL’.
+
+SELECT CUSTOMER_NAME, ANNUAL_REVENUE
+FROM TBL_CUSTOMER
+WHERE CUSTOMER_ID IN (
+    SELECT CUSTOMER_ID
+    FROM TBL_SHIPMENT_DETAILS
+    WHERE TRUCK_NO = (
+        SELECT TRUCK_NO
+        FROM TBL_TRUCK_INFO
+        WHERE DRIVER_NAME = 'IQBAL'
+    )
+);
+
+--  List drivers who have delivered shipments to every city.
+
+SELECT DRIVER_NAME
+FROM TBL_TRUCK_INFO
+GROUP BY DRIVER_NAME
+HAVING COUNT(DISTINCT TRUCK_NO) = (SELECT COUNT(DISTINCT DESTINATION_CITY) FROM TBL_SHIPMENT_DETAILS);
+
+--  For each city, with population over 1 million, what is the minimum weight of a package sent to that city.
+
+SELECT DESTINATION_CITY, MIN(WEIGHT) AS MIN_WEIGHT
+FROM TBL_SHIPMENT_DETAILS
+WHERE DESTINATION_CITY IN (
+    SELECT CITY_NAME
+    FROM TBL_CITY
+    WHERE CITY_POPULATION > 1000000
+) 
+GROUP BY DESTINATION_CITY;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

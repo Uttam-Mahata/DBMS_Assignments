@@ -123,18 +123,3 @@ WHERE rollno IN (
         WHERE dept_marks.deptcode = s.deptcode
     )
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
