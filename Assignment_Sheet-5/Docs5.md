@@ -139,3 +139,206 @@ CALL DeductServiceCharge();
 ```
 
 This procedure will reduce the balance by Rs.1000 for each customer in `cust_acct` with a balance of Rs.1000 or more. The table will reflect the updated balances after this procedure runs.
+
+
+
+Let's go through each of the requirements step-by-step, creating the necessary tables and writing PL/SQL code in MySQL.
+
+### 1. Update Salary of Each Employee in `EMP` Table by 15% Using a Cursor
+
+First, let's create the `EMP` table.
+
+#### Step 1.1: Create the `EMP` Table
+
+```sql
+CREATE TABLE EMP (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_name VARCHAR(50),
+    salary DECIMAL(10, 2) DEFAULT 0.00
+);
+```
+
+#### Step 1.2: Insert Sample Data
+
+```sql
+INSERT INTO EMP (emp_name, salary)
+VALUES 
+    ('John Doe', 40000.00),
+    ('Jane Smith', 50000.00),
+    ('Tom Johnson', 60000.00),
+    ('Emily Brown', 70000.00);
+```
+
+#### Step 1.3: Write the Procedure to Update Salaries Using a Cursor
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE UpdateEmployeeSalary()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE empId INT;
+    DECLARE currentSalary DECIMAL(10, 2);
+    DECLARE cur CURSOR FOR SELECT emp_id, salary FROM EMP;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    update_loop: LOOP
+        FETCH cur INTO empId, currentSalary;
+        
+        IF done THEN
+            LEAVE update_loop;
+        END IF;
+
+        -- Update salary by 15%
+        UPDATE EMP
+        SET salary = salary * 1.15
+        WHERE emp_id = empId;
+    END LOOP;
+
+    CLOSE cur;
+END$$
+
+DELIMITER ;
+```
+
+To execute this procedure and update each employee's salary by 15%, call:
+
+```sql
+CALL UpdateEmployeeSalary();
+```
+
+---
+
+### 2. Update the Balance in `ITEM_MSTR` Table Based on Transactions in `ITEM_TR` Table
+
+We need two tables: `ITEM_MSTR` for item master data and `ITEM_TR` for transactions.
+
+#### Step 2.1: Create `ITEM_MSTR` and `ITEM_TR` Tables
+
+```sql
+CREATE TABLE ITEM_MSTR (
+    item_id INT PRIMARY KEY,
+    item_name VARCHAR(50),
+    balance INT
+);
+
+CREATE TABLE ITEM_TR (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    item_id INT,
+    quantity INT
+);
+```
+
+#### Step 2.2: Insert Sample Data
+
+```sql
+INSERT INTO ITEM_MSTR (item_id, item_name, balance)
+VALUES
+    (1, 'Item A', 100),
+    (2, 'Item B', 200);
+
+INSERT INTO ITEM_TR (item_id, quantity)
+VALUES
+    (1, 10),
+    (3, 50); -- Item 3 does not exist in ITEM_MSTR
+```
+
+#### Step 2.3: Write the Procedure to Update or Insert Based on Transactions
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE UpdateItemBalance()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE itemId INT;
+    DECLARE quantity INT;
+    DECLARE cur CURSOR FOR SELECT item_id, quantity FROM ITEM_TR;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    update_loop: LOOP
+        FETCH cur INTO itemId, quantity;
+        
+        IF done THEN
+            LEAVE update_loop;
+        END IF;
+
+        -- Check if item_id exists in ITEM_MSTR
+        IF EXISTS (SELECT * FROM ITEM_MSTR WHERE item_id = itemId) THEN
+            -- Update balance by subtracting quantity
+            UPDATE ITEM_MSTR
+            SET balance = balance - quantity
+            WHERE item_id = itemId;
+        ELSE
+            -- Insert new item into ITEM_MSTR
+            INSERT INTO ITEM_MSTR (item_id, item_name, balance)
+            VALUES (itemId, CONCAT('New Item ', itemId), -quantity);
+        END IF;
+    END LOOP;
+
+    CLOSE cur;
+END$$
+
+DELIMITER ;
+```
+
+To execute this procedure and apply the transactions to `ITEM_MSTR`, call:
+
+```sql
+CALL UpdateItemBalance();
+```
+
+---
+
+### 3. Procedure for Raising Salary with Exception Handling for Non-existent Employee or NULL Salary
+
+#### Step 3.1: Write the Procedure to Raise Salary
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE RaiseEmployeeSalary(IN empId INT, IN raiseAmt DECIMAL(10, 2))
+BEGIN
+    DECLARE empExists BOOLEAN;
+    DECLARE salaryValue DECIMAL(10, 2);
+
+    -- Check if employee exists
+    SET empExists = (SELECT EXISTS (SELECT * FROM EMP WHERE emp_id = empId));
+
+    IF NOT empExists THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee ID not found';
+    END IF;
+
+    -- Retrieve salary and check if it's NULL
+    SET salaryValue = (SELECT salary FROM EMP WHERE emp_id = empId);
+
+    IF salaryValue IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Salary is NULL for this employee';
+    END IF;
+
+    -- Update the salary if no exceptions
+    UPDATE EMP
+    SET salary = salary + raiseAmt
+    WHERE emp_id = empId;
+END$$
+
+DELIMITER ;
+```
+
+This procedure raises the salary of a specified employee by a given amount. The procedure:
+- Raises an error if the employee ID does not exist.
+- Raises an error if the salary is `NULL`.
+
+#### Step 3.2: Execute the Procedure
+
+To raise the salary of an employee with ID `1` by `2000`, call:
+
+```sql
+CALL RaiseEmployeeSalary(1, 2000);
+```
+
+These PL/SQL blocks and procedures perform the required updates, handle transactions, and raise exceptions as specified.
