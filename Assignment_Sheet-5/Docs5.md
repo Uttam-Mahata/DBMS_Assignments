@@ -1,7 +1,4 @@
 
-\[
-\text{Circumference} = 2 \times \pi \times \text{Radius}
-\]
 
 
 
