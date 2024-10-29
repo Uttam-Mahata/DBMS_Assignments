@@ -61,7 +61,7 @@ BEGIN
 END;
 
 
--- Update the salary of each employee from EMP table by 15% using cursor.
+-- Update the salary of each EMPL from EMP table by 15% using cursor.
 
 CREATE TABLE EMP (
     id number,
@@ -82,7 +82,7 @@ INSERT INTO EMP (id, name, salary) VALUES (9, 'PRANAB PAL', 1800000);
 INSERT INTO EMP (id, name, salary) VALUES (10, 'SUCHANA HAZRA', 1700000);
 INSERT INTO EMP (id, name, salary) VALUES (11, 'RITABRATA BHATTACHARYA', 12000000);
 INSERT INTO EMP (id, name, salary) VALUES (12, 'SOHAM HALDAR', 1100000);
--- Update the salary of each employee from EMP table by 15% using cursor.
+-- Update the salary of each EMPL from EMP table by 15% using cursor.
 
 SET SERVEROUTPUT ON;
 DECLARE
@@ -151,29 +151,29 @@ BEGIN
 END;
 
 
--- Write a PROCEDURE for raising salary of some employee by some amount. The
+-- Write a PROCEDURE for raising salary of some EMPL by some amount. The
 -- PROCEDURE to be written may carry two parameters emp_id and amt to be raised. Include
 -- two exceptions which will be raised when either emp_id is not present or salary is NULL.
 
-CREATE TABLE EMPLOYEE (
+CREATE TABLE EMPL (
     id number,
     name varchar(255),
     salary number,
-    constraint employee_pk primary key (id)
+    constraint EMPL_pk primary key (id)
 );
 
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (1, 'ANURAG GHOSH', 1700000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (2, 'ABHILASH KUMAR', 190000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (3, 'ARNAV SEN', 120000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (4, 'ANIKET KUMAR', 110000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (5, 'SIDDHARTH SEN', 180000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (6, 'PRAVEEN KUMAR', 190000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (7, 'SOURAV SEN', 1200000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (8, 'AKHIL SINGH', 1100000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (9, 'PRANAB PAL', 1800000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (10, 'SUCHANA HAZRA', 1700000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (11, 'RITABRATA BHATTACHARYA', 12000000);
-INSERT INTO EMPLOYEE (id, name, salary) VALUES (12, 'SOHAM HALDAR', 1100000);
+INSERT INTO EMPL (id, name, salary) VALUES (1, 'ANURAG GHOSH', 1700000);
+INSERT INTO EMPL (id, name, salary) VALUES (2, 'ABHILASH KUMAR', 190000);
+INSERT INTO EMPL (id, name, salary) VALUES (3, 'ARNAV SEN', 120000);
+INSERT INTO EMPL (id, name, salary) VALUES (4, 'ANIKET KUMAR', 110000);
+INSERT INTO EMPL (id, name, salary) VALUES (5, 'SIDDHARTH SEN', 180000);
+INSERT INTO EMPL (id, name, salary) VALUES (6, 'PRAVEEN KUMAR', 190000);
+INSERT INTO EMPL (id, name, salary) VALUES (7, 'SOURAV SEN', 1200000);
+INSERT INTO EMPL (id, name, salary) VALUES (8, 'AKHIL SINGH', 1100000);
+INSERT INTO EMPL (id, name, salary) VALUES (9, 'PRANAB PAL', 1800000);
+INSERT INTO EMPL (id, name, salary) VALUES (10, 'SUCHANA HAZRA', 1700000);
+INSERT INTO EMPL (id, name, salary) VALUES (11, 'RITABRATA BHATTACHARYA', 12000000);
+INSERT INTO EMPL (id, name, salary) VALUES (12, 'SOHAM HALDAR', 1100000);
 
 
 SET SERVEROUTPUT ON;
@@ -181,15 +181,15 @@ SET SERVEROUTPUT ON;
 CREATE OR REPLACE PROCEDURE raise_salary (emp_id IN NUMBER, amt IN NUMBER) AS
     salary number;
 BEGIN
-    SELECT salary INTO salary FROM EMPLOYEE WHERE id = emp_id;
+    SELECT salary INTO salary FROM EMPL WHERE id = emp_id;
     IF salary IS NULL THEN
         RAISE_APPLICATION_ERROR(-20001, 'Salary is NULL');
     ELSE
-        UPDATE EMPLOYEE SET salary = salary + amt WHERE id = emp_id;
+        UPDATE EMPL SET salary = salary + amt WHERE id = emp_id;
     END IF;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        RAISE_APPLICATION_ERROR(-20002, 'Employee ID not found');
+        RAISE_APPLICATION_ERROR(-20002, 'EMPL ID not found');
 END;
 
 
