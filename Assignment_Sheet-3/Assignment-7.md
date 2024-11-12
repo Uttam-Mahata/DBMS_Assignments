@@ -1,6 +1,4 @@
-I can help you create and modify views in SQL to simulate these operations.
 
-Here's an example implementation in MySQL:
 
 ```sql
 -- Create view cse_stud for CSE students
